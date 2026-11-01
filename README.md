@@ -1,5 +1,8 @@
 # hylo-bench
 
+Part of [Hylo](https://hyloai.github.io/), the stack for physical AI. This repository is **Hylo Bench**, the
+**evaluation** layer.
+
 Benchmarking for Hylo: run a policy under a fixed **protocol** and get a **scorecard**; rank scorecards on
 **leaderboards** and compare two of them episode by episode. Built on the harness's evaluation engine (hylo-eval).
 
