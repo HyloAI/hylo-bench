@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 import numpy as np
@@ -7,9 +6,15 @@ import pytest
 from worldcurrent.envs.libero.env import quat2axisangle
 from worldcurrent.envs.libero.suites import MAX_STEPS, libero_benchmark, libero_tasks
 
+from worldcurrent.core.profile import load_profile
+
 ROOT = Path(__file__).resolve().parents[3]
 SIM_PY = ROOT / "envs" / "libero" / ".venv" / "bin" / "python"
 MESA = Path.home() / ".local" / "mesa" / "root" / "usr" / "lib" / "x86_64-linux-gnu"
+LOCAL = {"python": str(SIM_PY), "env": {"MUJOCO_GL": "osmesa", "PYOPENGL_PLATFORM": "osmesa", "LD_LIBRARY_PATH": str(MESA),
+                                        "LIBERO_CONFIG_PATH": str(ROOT / "envs" / "libero" / "config")}}
+# the simulator runtime registered in this machine's profile (envs/libero/setup.sh), else a venv in this checkout
+SIM = {"runtime": "libero-sim"} if "libero-sim" in load_profile().runtimes else (LOCAL if SIM_PY.exists() else None)
 
 
 def test_task_index_covers_the_standard_suites():
@@ -32,8 +37,8 @@ def test_quat2axisangle_matches_the_robosuite_formula():
     assert np.allclose(quat2axisangle(np.array([0.0, 0.0, np.sin(half), np.cos(half)])), [0.0, 0.0, np.pi / 2])
 
 
-@pytest.mark.skipif(not (SIM_PY.exists() and (MESA / "libOSMesa.so.8").exists()),
-                    reason="needs envs/libero (envs/libero/setup.sh) and user-space OSMesa")
+@pytest.mark.skipif(SIM is None or not (MESA / "libOSMesa.so.8").exists(),
+                    reason="needs the libero-sim runtime (envs/libero/setup.sh) and user-space OSMesa")
 def test_remote_libero_episode_runs_end_to_end(tmp_path):
     from worldcurrent.agents.baseline import RandomAgent
     from worldcurrent.core.kernel import EpisodeRunner
@@ -41,9 +46,7 @@ def test_remote_libero_episode_runs_end_to_end(tmp_path):
     from worldcurrent.core.task import TaskInstance
     from worldcurrent.core.trace import TraceStore
 
-    env = RemoteEnvironment("worldcurrent.envs.libero.env:LiberoEnv", {"image_size": 128}, python=str(SIM_PY), env={
-        "MUJOCO_GL": "osmesa", "PYOPENGL_PLATFORM": "osmesa", "LD_LIBRARY_PATH": str(MESA),
-        "LIBERO_CONFIG_PATH": str(ROOT / "envs" / "libero" / "config")})
+    env = RemoteEnvironment("worldcurrent.envs.libero.env:LiberoEnv", {"image_size": 128}, **SIM)
     try:
         spec = libero_tasks("libero_spatial", [0])[0].model_copy(update={"max_steps": 5})
         store = TraceStore(tmp_path)
