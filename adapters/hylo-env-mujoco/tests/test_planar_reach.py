@@ -33,7 +33,9 @@ def test_mujoco_snapshot_restore_is_exact(mj):
     np.testing.assert_array_equal(np.stack(a), np.stack(b))
 
 
-def test_mujoco_divergence_is_reported_not_hidden(mj):
+def test_mujoco_divergence_is_reported_not_hidden(mj, tmp_path, monkeypatch):
+    # The injected NaN is intentional; MuJoCo logs the warning to MUJOCO_LOG.TXT in the working directory.
+    monkeypatch.chdir(tmp_path)
     env, tasks = mj
     env.reset(TaskInstance(spec=tasks[0], seed=0))
     env.data.qvel[:] = np.nan

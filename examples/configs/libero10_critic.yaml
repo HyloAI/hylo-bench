@@ -1,5 +1,5 @@
 # SmolVLA on LIBERO-10: sample 4 chunks per decision, execute the one a learned chunk critic values most
-# (hylo.agents.critic). Train the critic first:
+# (hylo.agents.critic, model in hylo.instruments.critic). Train the critic first:
 #   uv run python -m hylo.learn.critic --runs runs/... --task-prefix libero/libero_10/ \
 #       --image-camera agentview --out runs/critics/<name>
 # and reference it by id (`hylo store ref runs/critics/<name>`). l10-v1 predates manifests and was adopted without
