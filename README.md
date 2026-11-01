@@ -75,7 +75,7 @@ uv run hylo bench compare scorecards/mujoco-reach/ik-0.3.json scorecards/mujoco-
 <p align="center">
   <img src=".github/assets/leaderboard-mujoco-reach.png" width="86%" alt="Success on mujoco-reach, 100 held-out episodes per policy: expert-ik 100%, mpc-cem 86%, flow+steering-4 84%, flow 83%, bc+temporal-ensemble 83%, bc 71%, tokens 68%, knn 64%">
 </p>
-<p align="center"><sub>The reference-policy leaderboard on <code>mujoco-reach</code> (<code>examples/policies/</code>): reference policies trained from recorded runs against the expert IK controller, 100 held-out episodes each, 95% Wilson intervals.</sub></p>
+<p align="center">Reference policies on <code>mujoco-reach</code> against the expert IK controller: 100 held-out episodes each, 95% Wilson intervals.</p>
 
 Runs go to `runs/`, scorecards to `scorecards/<protocol>/<policy>.json` (`--out` changes the root).
 `runs/` is this machine's run and artifact store once registered (`hylo store init runs`): configs reference
