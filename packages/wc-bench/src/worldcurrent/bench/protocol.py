@@ -43,7 +43,8 @@ class Protocol(Contract):
 
     def digest(self) -> str:
         measured = self.model_dump(mode="json", exclude={"description", "workers", "requires"})
-        measured["env"].pop("remote", None)                  # where the simulator runs is not measured
+        if "remote" in measured["env"]:                      # where the simulator runs is not measured: hashed as a
+            measured["env"]["remote"] = None                 # local environment, so local protocols keep their digests
         if measured["timing"] == Timing().model_dump(mode="json"):
             measured.pop("timing")
         return hashlib.sha256(json.dumps(measured, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:16]

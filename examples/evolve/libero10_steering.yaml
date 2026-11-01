@@ -3,7 +3,7 @@
 #   uv run wc evolve status runs/evolve/libero10-steering
 schema_version: wc.evolve/v0.1
 name: libero10-steering
-experiment: examples/configs/libero10_steered.yaml
+experiment: ../configs/libero10_steered.yaml
 experiment_overrides:
   benchmark.params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}
   workers: 24

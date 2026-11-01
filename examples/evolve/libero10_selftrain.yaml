@@ -3,7 +3,7 @@
 #   uv run wc evolve run examples/evolve/libero10_selftrain.yaml
 schema_version: wc.evolve/v0.1
 name: libero10-selftrain
-experiment: examples/configs/libero10_steered.yaml
+experiment: ../configs/libero10_steered.yaml
 experiment_overrides:
   benchmark.params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}
   agent.params.params.steering: {n_samples: 1, seed_noise: true, execution_steps: 25}

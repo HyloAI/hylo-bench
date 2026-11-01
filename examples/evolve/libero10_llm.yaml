@@ -1,9 +1,9 @@
 # Frozen SmolVLA on LIBERO-10, steering candidates proposed by a local LLM (qwen3.5) from failure traces. CPU only.
-#   uv run wc evolve run examples/evolve/libero10_steering.yaml
+#   uv run wc evolve run examples/evolve/libero10_llm.yaml
 #   uv run wc evolve status runs/evolve/libero10-llm
 schema_version: wc.evolve/v0.1
 name: libero10-llm
-experiment: examples/configs/libero10_steered.yaml
+experiment: ../configs/libero10_steered.yaml
 experiment_overrides:
   benchmark.params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}
   workers: 24

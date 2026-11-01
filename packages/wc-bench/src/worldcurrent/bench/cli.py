@@ -39,7 +39,7 @@ def main(argv: Sequence[str]) -> int:
     r.add_argument("--name", required=True, help="the policy's name on the leaderboard")
     r.add_argument("--out", default=".", help="runs go to OUT/runs, scorecards to OUT/scorecards")
     r.add_argument("--workers", type=int)
-    r.add_argument("--set", action="append", metavar="KEY=VALUE", help="execution only: env.remote.* (e.g. a venv path)")
+    r.add_argument("--set", action="append", metavar="KEY=VALUE", help="execution only: env.remote.* (e.g. env.remote.runtime=NAME)")
     r.add_argument("--notes")
     lb = sub.add_parser("leaderboard", help="rank scorecards per protocol")
     lb.add_argument("dirs", nargs="*", default=["scorecards"])

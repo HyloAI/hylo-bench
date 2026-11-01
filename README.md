@@ -41,3 +41,5 @@ packages from a checkout next to this one (`WC_HARNESS`, default `../harness`) a
 they run from any directory, and where things are installed never changes an experiment's digest (RFC-0005).
 `libero-10-heldout-realtime` scores the same episodes as a robot would run them (0.5 s per chunk, the arm keeps
 moving): the gap to `libero-10-heldout` is what deployment costs a policy.
+
+Documentation (worldcurrent-docs, `uv run mkdocs serve -f docs/mkdocs.yml` from the workspace): [benchmarking](../docs/docs/benchmarking/index.md), [protocols](../docs/docs/benchmarking/protocols.md), [leaderboard](../docs/docs/benchmarking/leaderboard.md).

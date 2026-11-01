@@ -3,7 +3,7 @@
 # held-out report) decides.   uv run wc evolve run examples/evolve/mujoco_reach_gain.yaml
 schema_version: wc.evolve/v0.1
 name: mujoco-reach-gain
-experiment: examples/configs/mujoco_reach.yaml
+experiment: ../configs/mujoco_reach.yaml
 experiment_overrides: {agent.params.kp: 0.02, workers: 16, benchmark.params: {protocol: rsi, gate_looks: 2}}
 proposer: {type: rule.gain, params: {path: agent.params.kp, factors: [2.0, 4.0]}}
 protocol: {alpha: 0.05, gate_looks: 2, stage1_pairs: 20}
