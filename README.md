@@ -43,3 +43,7 @@ they run from any directory, and where things are installed never changes an exp
 moving): the gap to `libero-10-heldout` is what deployment costs a policy.
 
 Documentation (hylo-docs, `uv run mkdocs serve -f docs/mkdocs.yml` from the workspace): [benchmarking](../docs/docs/benchmarking/index.md), [protocols](../docs/docs/benchmarking/protocols.md), [leaderboard](../docs/docs/benchmarking/leaderboard.md).
+
+## License
+
+Apache License 2.0 (see [LICENSE](LICENSE)). Copyright 2026 Hylo AI.
