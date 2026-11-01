@@ -1,0 +1,27 @@
+# SmolVLA on LIBERO-10 steered by an action memory of its own verified successes (RFC-0003 M1):
+# flow sampling starts from a retrieved prior at t0 in [t0_min, t0_max] instead of pure noise.
+# Build the memory first (development splits only):
+#   envs/libero/.venv/bin/python -m worldcurrent.policies.lerobot.memory_build --runs runs/<search runs> \
+#       --splits search --out runs/memory/<name>
+# then reference it by id: `wc store ref runs/memory/<name>`
+schema_version: wc.experiment/v0.1
+name: libero10-memory
+benchmark: {type: libero, split: search_val, params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}}
+env:
+  type: libero
+  remote: {runtime: libero-sim}
+agent:
+  type: remote
+  params:
+    ref: lerobot.memory_steered
+    runtime: lerobot
+    params:
+      repo_id: lerobot/smolvla_libero
+      num_threads: 4
+      steering: {n_samples: 1, seed_noise: true}
+      memory: {type: action_bank, params: {path: "artifact:l10-search-v1@40a84dd1afab4a5c"}}
+      memory_steer: {k: 10, same_task: true, sim_floor: 0.95, t0_min: 0.1, t0_max: 0.7}
+    env: {TORCHDYNAMO_DISABLE: "1"}
+trace: {record_privileged: true, image_every: 10}
+workers: 24
+output_dir: runs

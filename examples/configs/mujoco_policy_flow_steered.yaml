@@ -1,0 +1,15 @@
+# A flow-matching policy (trained by examples/policies: compare.py, or wc learn examples/policies/jobs/flow.json)
+# steered: 4 seeded samples per decision, the medoid executed. Any registered policy can be the sampler:
+# policy.bc, policy.tokens, lerobot, your own. The sampler is referenced by store id; without a digest, the one
+# artifact of that name (retraining replaces it), pinned in the run's manifest.
+schema_version: wc.experiment/v0.1
+name: mujoco-policy-flow-steered
+benchmark: {type: mujoco/reach-v0, split: heldout, params: {protocol: rsi}}
+env: {type: mujoco.planar_reach}
+agent:
+  type: steered
+  params:
+    sampler: {type: policy.flow, params: {path: "artifact:policy.flow"}}
+    steering: {n_samples: 4, selector: medoid}
+workers: 8
+output_dir: runs

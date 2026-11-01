@@ -1,0 +1,18 @@
+# SmolVLA (lerobot/smolvla_libero, 450M) on LIBERO, CPU only.
+# Simulator and policy each run out of process in this machine's libero-sim / lerobot runtimes (wc profile show;
+# bench's envs/libero/setup.sh builds the venv and registers both).
+schema_version: wc.experiment/v0.1
+name: libero-smolvla
+benchmark: {type: libero, split: validation, params: {suite: libero_spatial, n_validation: 5, n_heldout: 0}}
+env:
+  type: libero
+  remote: {runtime: libero-sim, env: {OMP_NUM_THREADS: "2", LP_NUM_THREADS: "4"}}
+agent:
+  type: remote
+  params:
+    ref: worldcurrent.policies.lerobot.agent:LeRobotAgent
+    runtime: lerobot
+    params: {repo_id: lerobot/smolvla_libero, num_threads: 6}
+trace: {record_privileged: true, image_every: 10}   # keep every 10th camera frame (a frame pair is ~400 KB)
+workers: 10
+output_dir: runs

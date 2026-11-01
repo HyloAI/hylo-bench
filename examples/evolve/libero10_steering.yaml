@@ -1,0 +1,17 @@
+# Frozen SmolVLA on LIBERO-10: evolve steering (L0/L1) with the RFC-0002 protocol, CPU only.
+#   uv run wc evolve run examples/evolve/libero10_steering.yaml
+#   uv run wc evolve status runs/evolve/libero10-steering
+schema_version: wc.evolve/v0.1
+name: libero10-steering
+experiment: examples/configs/libero10_steered.yaml
+experiment_overrides:
+  benchmark.params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}
+  workers: 24
+proposer: {type: rule.steering, params: {}}
+diagnosis: {stall_steps: 30, regrasp: 3}
+protocol: {alpha: 0.05, gate_looks: 3, spending_rho: 3.0, stage1_pairs: 30, stage1_max_deficit: 4, gate_top_k: 1}
+cycles: 3
+stop_after_no_progress: 2
+budget_s: 28800
+approval: auto        # use manual for anything that runs on hardware
+out_dir: runs/evolve/libero10-steering

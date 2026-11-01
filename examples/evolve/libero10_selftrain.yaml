@@ -1,0 +1,18 @@
+# Expert iteration on LIBERO-10 (RFC-0002 L4): each cycle fine-tunes SmolVLA's action expert on its own
+# successful search-split episodes (CPU), then gates the new weights on unseen init states.
+#   uv run wc evolve run examples/evolve/libero10_selftrain.yaml
+schema_version: wc.evolve/v0.1
+name: libero10-selftrain
+experiment: examples/configs/libero10_steered.yaml
+experiment_overrides:
+  benchmark.params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}
+  agent.params.params.steering: {n_samples: 1, seed_noise: true, execution_steps: 25}
+  workers: 24
+proposer: {type: selftrain.expert_iteration, params: {out_root: runs/selftrain/libero10, steps: 300, batch_size: 8, lr: 1.0e-5}}
+diagnosis: {stall_steps: 30, regrasp: 3}
+protocol: {alpha: 0.05, gate_looks: 3, spending_rho: 3.0, stage1_pairs: 30, stage1_max_deficit: 4, gate_top_k: 1}
+cycles: 2
+stop_after_no_progress: 1
+budget_s: 43200
+approval: manual      # new weights: a person signs off before promotion
+out_dir: runs/evolve/libero10-selftrain

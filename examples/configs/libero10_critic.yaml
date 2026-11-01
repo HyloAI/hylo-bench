@@ -1,0 +1,25 @@
+# SmolVLA on LIBERO-10: sample 4 chunks per decision, execute the one a learned chunk critic values most
+# (worldcurrent.agents.critic). Train the critic first:
+#   uv run python -m worldcurrent.learn.critic --runs runs/... --task-prefix libero/libero_10/ \
+#       --image-camera agentview --out runs/critics/<name>
+# and reference it by id (`wc store ref runs/critics/<name>`). l10-v1 predates manifests and was adopted without
+# a record of its training runs: it runs here, but the RSI gate refuses it in a candidate (unknown provenance).
+schema_version: wc.experiment/v0.1
+name: libero10-critic
+benchmark: {type: libero, split: search_val, params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}}
+env:
+  type: libero
+  remote: {runtime: libero-sim}
+agent:
+  type: remote
+  params:
+    ref: lerobot.critic_steered
+    runtime: lerobot
+    params:
+      repo_id: lerobot/smolvla_libero
+      num_threads: 3
+      steering: {n_samples: 4, selector: gripper_vote_medoid, execution_steps: 25, seed_noise: true}
+      critic: {path: "artifact:l10-v1@7934d463d67ad242", beta: 0.5, within_vote: true}
+trace: {record_privileged: true, image_every: 5}
+workers: 12
+output_dir: runs

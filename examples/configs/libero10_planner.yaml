@@ -1,0 +1,39 @@
+# LIBERO-10 with an LLM/VLM subgoal planner (qwen3.5) in front of the steered SmolVLA. CPU only.
+schema_version: wc.experiment/v0.1
+name: libero10-planner
+benchmark:
+  type: libero
+  split: validation
+  params:
+    suite: libero_10
+    n_validation: 10
+    n_heldout: 0
+env:
+  type: libero
+  remote: {runtime: libero-sim}
+agent:
+  type: planner.subgoal
+  params:
+    inner:
+      type: remote
+      params:
+        ref: lerobot.steered
+        runtime: lerobot
+        params:
+          repo_id: lerobot/smolvla_libero
+          num_threads: 4
+          steering:
+            n_samples: 1
+            seed_noise: true
+    planner:
+      type: planner.llm
+      params:
+        model: qwen3.5:35b-a3b
+        cache_dir: runs/llm-cache
+        subgoal_max_steps: 260
+    check_every: 1
+trace:
+  record_privileged: true
+  image_every: 10
+workers: 24
+output_dir: runs

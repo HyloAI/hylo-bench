@@ -1,0 +1,2 @@
+{"learner": "world_model.state", "inputs": ["runs/policies/demos", "runs/policies/explore"],
+ "out": "runs/policies/artifacts/world_model", "params": {"env": {"type": "mujoco.planar_reach"}}}

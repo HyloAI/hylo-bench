@@ -1,0 +1,2 @@
+{"learner": "policy.bc", "inputs": ["runs/policies/demos"], "out": "runs/policies/artifacts/bc",
+ "params": {"chunk": 8, "epochs": 150, "hidden": 128, "execution_steps": 4}}

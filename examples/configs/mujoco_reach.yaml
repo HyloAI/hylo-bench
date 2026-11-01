@@ -1,0 +1,6 @@
+schema_version: wc.experiment/v0.1
+name: mujoco-reach
+benchmark: {type: mujoco/reach-v0, split: validation}
+env: {type: mujoco.planar_reach}
+agent: {type: baseline.planar_ik, params: {kp: 0.3}}
+output_dir: runs

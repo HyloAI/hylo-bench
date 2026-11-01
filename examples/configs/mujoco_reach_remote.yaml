@@ -1,0 +1,8 @@
+# The MuJoCo reach experiment with the simulator in a separate process (EnvServer protocol). Set `python:` to another
+# venv's interpreter to run an environment whose dependencies conflict with yours (LIBERO does this).
+schema_version: wc.experiment/v0.1
+name: mujoco-reach-remote
+benchmark: {type: mujoco/reach-v0, split: validation}
+env: {type: mujoco.planar_reach, remote: {}}
+agent: {type: baseline.planar_ik, params: {kp: 0.3}}
+output_dir: runs

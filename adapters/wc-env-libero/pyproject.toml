@@ -1,0 +1,27 @@
+[project]
+name = "wc-env-libero"
+version = "0.1.0.dev0"
+description = "worldcurrent LIBERO environment adapter (runs out of process in its own venv) and LIBERO benchmarks"
+requires-python = ">=3.10"
+dependencies = ["wc-core", "wc-eval"]
+license = "Apache-2.0"
+
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/worldcurrent"]
+
+[project.entry-points."worldcurrent.envs"]
+"libero" = "worldcurrent.envs.libero.env:LiberoEnv"
+
+[project.entry-points."worldcurrent.benchmarks"]
+"libero" = "worldcurrent.envs.libero.suites:libero_benchmark"
+
+[tool.uv.sources]
+wc-core = { workspace = true }
+wc-eval = { workspace = true }
+
+[project.entry-points."worldcurrent.meta"]
+"wc-env-libero" = "worldcurrent.envs.libero:META"

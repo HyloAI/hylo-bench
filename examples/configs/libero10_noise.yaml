@@ -1,0 +1,26 @@
+# SmolVLA on LIBERO-10 with noise-space steering (RFC-0004 W3): the initial flow noise is biased towards the
+# noise that produced similar successful chunks; the policy is unchanged. Build the bank first (search split only):
+#   envs/libero/.venv/bin/python -m worldcurrent.policies.lerobot.memory_build --store noise --splits search \
+#       --runs runs/<search runs> --out runs/memory/<name>
+# then reference it by id: `wc store ref runs/memory/<name>`
+schema_version: wc.experiment/v0.1
+name: libero10-noise
+benchmark: {type: libero, split: search_val, params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}}
+env:
+  type: libero
+  remote: {runtime: libero-sim}
+agent:
+  type: remote
+  params:
+    ref: lerobot.noise_steered
+    runtime: lerobot
+    params:
+      repo_id: lerobot/smolvla_libero
+      num_threads: 4
+      steering: {n_samples: 1, seed_noise: true}
+      memory: {type: action_bank, params: {path: "artifact:l10-noise-search-v1@2687768fc5102b06", frozen: true}}
+      noise_steer: {weight: 0.5, k: 5, same_task: true, sim_floor: 0.95}
+    env: {TORCHDYNAMO_DISABLE: "1"}
+trace: {record_privileged: true, image_every: 10}
+workers: 24
+output_dir: runs

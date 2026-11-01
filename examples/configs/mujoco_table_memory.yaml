@@ -1,0 +1,11 @@
+# Language-conditioned reaching with spatial memory on the MuJoCo table: the pads are visible only for the first
+# 5 control steps, so the agent must remember where the named pad was (see external_demo/ for the full study).
+schema_version: wc.experiment/v0.1
+name: mujoco-table-memory
+benchmark: {type: mujoco/table-v0, split: validation}
+env: {type: mujoco.table_reach}
+agent:
+  type: composable.object_reach
+  params: {kp: 0.3, chooser: {type: chooser.rule_color}, memory: {type: sqlite, params: {path: ":memory:"}}}
+safety: {max_delta: 0.5}
+output_dir: runs

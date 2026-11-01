@@ -1,0 +1,10 @@
+schema_version: wc.protocol/v0.1
+name: testing-reach
+version: "1"
+description: |
+  Test protocol over the test double (worldcurrent.testing): wc-bench's own unit tests only, not shipped.
+benchmark: {type: testing/reach-v0, split: heldout, params: {tags: [reach]}}
+env: {type: testing.point_reach}
+safety: {max_delta: 0.25}
+trace: {record_privileged: true, image_every: 0}
+requires: [wc-eval]

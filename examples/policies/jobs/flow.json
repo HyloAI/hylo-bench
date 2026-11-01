@@ -1,0 +1,2 @@
+{"learner": "policy.flow", "inputs": ["runs/policies/demos"], "out": "runs/policies/artifacts/flow",
+ "params": {"chunk": 8, "epochs": 300, "integration_steps": 10}}

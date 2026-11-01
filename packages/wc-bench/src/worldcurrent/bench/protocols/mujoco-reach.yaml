@@ -1,0 +1,10 @@
+schema_version: wc.protocol/v0.1
+name: mujoco-reach
+version: "1"
+description: |
+  Planar two-link arm reaching in MuJoCo: a fixed and a random target, 50 held-out seeds each (100 episodes).
+benchmark: {type: mujoco/reach-v0, split: heldout, params: {heldout: 50}}
+env: {type: mujoco.planar_reach}
+trace: {record_privileged: true, image_every: 0}
+workers: 16
+requires: [wc-env-mujoco]
