@@ -1,4 +1,4 @@
-"""worldcurrent external demo: language + memory + self-improvement on a MuJoCo table-top task.
+"""Hylo external demo: language + memory + self-improvement on a MuJoCo table-top task.
 
     uv run --group demo python examples/external_demo/run_demo.py            # full (about 3-5 min first run)
     uv run --group demo python examples/external_demo/run_demo.py --quick    # fewer seeds
@@ -47,16 +47,16 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
-from worldcurrent.eval.experiment import run_experiment  # noqa: E402
-from worldcurrent.eval.runner import EvalResult  # noqa: E402
-from worldcurrent.eval.scoring import paired_compare  # noqa: E402
-from worldcurrent.core.config import ExperimentConfig  # noqa: E402
-from worldcurrent.core.task import TaskInstance  # noqa: E402
-from worldcurrent.core.trace import TraceStore  # noqa: E402
-from worldcurrent.core.types import Action  # noqa: E402
-from worldcurrent.envs.mujoco.table_reach import TableReachEnv, table_tasks  # noqa: E402
-from worldcurrent.evolve.candidate import Candidate, CandidateRegistry  # noqa: E402
-from worldcurrent.evolve.loop import GainProposer, improvement_cycle  # noqa: E402
+from hylo.eval.experiment import run_experiment  # noqa: E402
+from hylo.eval.runner import EvalResult  # noqa: E402
+from hylo.eval.scoring import paired_compare  # noqa: E402
+from hylo.core.config import ExperimentConfig  # noqa: E402
+from hylo.core.task import TaskInstance  # noqa: E402
+from hylo.core.trace import TraceStore  # noqa: E402
+from hylo.core.types import Action  # noqa: E402
+from hylo.envs.mujoco.table_reach import TableReachEnv, table_tasks  # noqa: E402
+from hylo.evolve.candidate import Candidate, CandidateRegistry  # noqa: E402
+from hylo.evolve.loop import GainProposer, improvement_cycle  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from replay2d import render_episode_gif  # noqa: E402
@@ -354,7 +354,7 @@ stored in the trace:</p>
     det_txt = ", ".join(f"{d['max_tip_deviation_m']:.1e} m" for d in det) or "n/a"
     rsi = summary["rsi"]
     llm = summary.get("llm_calls", {})
-    return f"""<!doctype html><html><head><meta charset="utf-8"><title>worldcurrent demo</title>
+    return f"""<!doctype html><html><head><meta charset="utf-8"><title>Hylo demo</title>
 <style>
 body{{font:15px/1.5 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;max-width:1100px;margin:32px auto;padding:0 16px;color:#1f2328}}
 h1{{margin-bottom:0}} h2{{margin-top:36px;border-bottom:1px solid #ddd;padding-bottom:4px}}
@@ -363,7 +363,7 @@ th{{background:#f6f8fa}} tr.ok td:first-child{{border-left:4px solid #2da44e}} t
 .lead{{color:#57606a}} figure{{display:inline-block;margin:8px;text-align:center;font-size:12px;max-width:440px}} figure.wide{{max-width:100%;display:block}} img,video{{max-width:100%}}
 .pill{{display:inline-block;background:#eef;border-radius:10px;padding:1px 8px;margin-right:6px;font-size:12px}} code{{font-size:12px}}
 </style></head><body>
-<h1>worldcurrent: language, memory and self-improvement in one harness</h1>
+<h1>Hylo: language, memory and self-improvement in one harness</h1>
 <p class="lead">MuJoCo table-top task. A planar arm must touch the pad named by a natural-language instruction.
 Pads are visible only for the first 5 control steps (0.25 s); after that the agent must act from memory. Every action of every agent
 passes through the same SafetyShield, and every observation, decision, memory access and safety review is written to a replayable trace.</p>

@@ -1,7 +1,7 @@
 # SmolVLA on LIBERO-10 behind SteeredAgent (seeded noise, sample-and-select, runtime rules). CPU only.
-# Simulator and policy each run out of process in this machine's libero-sim / lerobot runtimes (wc profile show;
+# Simulator and policy each run out of process in this machine's libero-sim / lerobot runtimes (hylo profile show;
 # bench's envs/libero/setup.sh builds the venv and registers both).
-schema_version: wc.experiment/v0.1
+schema_version: hylo.experiment/v0.1
 name: libero10-steered
 benchmark: {type: libero, split: validation, params: {suite: libero_10, n_validation: 10, n_heldout: 0}}
 env:

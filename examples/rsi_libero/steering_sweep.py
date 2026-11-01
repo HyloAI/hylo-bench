@@ -13,9 +13,9 @@ import json
 import time
 from pathlib import Path
 
-from worldcurrent.eval.experiment import run_experiment
-from worldcurrent.eval.scoring import paired_compare
-from worldcurrent.core.config import ExperimentConfig
+from hylo.eval.experiment import run_experiment
+from hylo.eval.scoring import paired_compare
+from hylo.core.config import ExperimentConfig
 
 ROOT = Path(__file__).resolve().parents[2]
 

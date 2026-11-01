@@ -15,13 +15,13 @@ import argparse
 import time
 from pathlib import Path
 
-from worldcurrent.bench import leaderboard
-from worldcurrent.bench.protocol import load_protocol
-from worldcurrent.bench.run import run_protocol
-from worldcurrent.core.config import ExperimentConfig
-from worldcurrent.core.learning import TrainJob
-from worldcurrent.eval.experiment import run_experiment
-from worldcurrent.learn.jobs import run_job
+from hylo.bench import leaderboard
+from hylo.bench.protocol import load_protocol
+from hylo.bench.run import run_protocol
+from hylo.core.config import ExperimentConfig
+from hylo.core.learning import TrainJob
+from hylo.eval.experiment import run_experiment
+from hylo.learn.jobs import run_job
 
 EXPERT = {"type": "baseline.planar_ik", "params": {"kp": 0.3}}
 DATA = ExperimentConfig(name="policies", benchmark={"type": "mujoco/reach-v0", "params": {"protocol": "rsi"}},

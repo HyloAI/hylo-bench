@@ -1,9 +1,9 @@
 # SmolVLA on LIBERO-10 with noise-space steering (RFC-0004 W3): the initial flow noise is biased towards the
 # noise that produced similar successful chunks; the policy is unchanged. Build the bank first (search split only):
-#   envs/libero/.venv/bin/python -m worldcurrent.policies.lerobot.memory_build --store noise --splits search \
+#   envs/libero/.venv/bin/python -m hylo.policies.lerobot.memory_build --store noise --splits search \
 #       --runs runs/<search runs> --out runs/memory/<name>
-# then reference it by id: `wc store ref runs/memory/<name>`
-schema_version: wc.experiment/v0.1
+# then reference it by id: `hylo store ref runs/memory/<name>`
+schema_version: hylo.experiment/v0.1
 name: libero10-noise
 benchmark: {type: libero, split: search_val, params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}}
 env:

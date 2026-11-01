@@ -13,10 +13,10 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-from worldcurrent.core.task import TaskInstance
-from worldcurrent.core.trace import EpisodeTrace
-from worldcurrent.core.types import Action
-from worldcurrent.envs.mujoco.table_reach import TableReachEnv, table_tasks
+from hylo.core.task import TaskInstance
+from hylo.core.trace import EpisodeTrace
+from hylo.core.types import Action
+from hylo.envs.mujoco.table_reach import TableReachEnv, table_tasks
 
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"

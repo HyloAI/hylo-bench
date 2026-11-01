@@ -1,10 +1,10 @@
 # SmolVLA on LIBERO-10: sample 4 chunks per decision, execute the one a learned chunk critic values most
-# (worldcurrent.agents.critic). Train the critic first:
-#   uv run python -m worldcurrent.learn.critic --runs runs/... --task-prefix libero/libero_10/ \
+# (hylo.agents.critic). Train the critic first:
+#   uv run python -m hylo.learn.critic --runs runs/... --task-prefix libero/libero_10/ \
 #       --image-camera agentview --out runs/critics/<name>
-# and reference it by id (`wc store ref runs/critics/<name>`). l10-v1 predates manifests and was adopted without
+# and reference it by id (`hylo store ref runs/critics/<name>`). l10-v1 predates manifests and was adopted without
 # a record of its training runs: it runs here, but the RSI gate refuses it in a candidate (unknown provenance).
-schema_version: wc.experiment/v0.1
+schema_version: hylo.experiment/v0.1
 name: libero10-critic
 benchmark: {type: libero, split: search_val, params: {suite: libero_10, protocol: rsi, replicates: 1, gate_looks: 3}}
 env:

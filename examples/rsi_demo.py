@@ -13,10 +13,10 @@ import json
 import tempfile
 from pathlib import Path
 
-from worldcurrent.eval.experiment import run_experiment
-from worldcurrent.core.config import ExperimentConfig
-from worldcurrent.evolve.candidate import Candidate, CandidateRegistry
-from worldcurrent.evolve.loop import GainProposer, improvement_cycle
+from hylo.eval.experiment import run_experiment
+from hylo.core.config import ExperimentConfig
+from hylo.evolve.candidate import Candidate, CandidateRegistry
+from hylo.evolve.loop import GainProposer, improvement_cycle
 
 
 class WithAdversary(GainProposer):

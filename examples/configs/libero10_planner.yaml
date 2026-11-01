@@ -1,5 +1,5 @@
 # LIBERO-10 with an LLM/VLM subgoal planner (qwen3.5) in front of the steered SmolVLA. CPU only.
-schema_version: wc.experiment/v0.1
+schema_version: hylo.experiment/v0.1
 name: libero10-planner
 benchmark:
   type: libero

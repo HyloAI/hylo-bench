@@ -1,7 +1,7 @@
 # Expert iteration on LIBERO-10 (RFC-0002 L4): each cycle fine-tunes SmolVLA's action expert on its own
 # successful search-split episodes (CPU), then gates the new weights on unseen init states.
-#   uv run wc evolve run examples/evolve/libero10_selftrain.yaml
-schema_version: wc.evolve/v0.1
+#   uv run hylo evolve run examples/evolve/libero10_selftrain.yaml
+schema_version: hylo.evolve/v0.1
 name: libero10-selftrain
 experiment: ../configs/libero10_steered.yaml
 experiment_overrides:

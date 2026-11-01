@@ -1,7 +1,7 @@
 # Frozen SmolVLA on LIBERO-10: evolve steering (L0/L1) with the RFC-0002 protocol, CPU only.
-#   uv run wc evolve run examples/evolve/libero10_steering.yaml
-#   uv run wc evolve status runs/evolve/libero10-steering
-schema_version: wc.evolve/v0.1
+#   uv run hylo evolve run examples/evolve/libero10_steering.yaml
+#   uv run hylo evolve status runs/evolve/libero10-steering
+schema_version: hylo.evolve/v0.1
 name: libero10-steering
 experiment: ../configs/libero10_steered.yaml
 experiment_overrides:

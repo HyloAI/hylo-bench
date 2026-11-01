@@ -9,7 +9,7 @@ import json
 import sys
 from pathlib import Path
 
-from worldcurrent.eval.scoring import one_sided_exact_mcnemar
+from hylo.eval.scoring import one_sided_exact_mcnemar
 
 
 def load(paths: list[str]) -> dict[str, dict]:

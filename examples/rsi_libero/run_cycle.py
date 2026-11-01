@@ -13,11 +13,11 @@ import json
 import time
 from pathlib import Path
 
-from worldcurrent.eval.experiment import run_experiment
-from worldcurrent.core.config import ExperimentConfig
-from worldcurrent.evolve.candidate import CandidateRegistry
-from worldcurrent.evolve.protocol import Archive, ProtocolConfig, run_cycle
-from worldcurrent.evolve.steering import SteeringRuleProposer, diagnose_traces
+from hylo.eval.experiment import run_experiment
+from hylo.core.config import ExperimentConfig
+from hylo.evolve.candidate import CandidateRegistry
+from hylo.evolve.protocol import Archive, ProtocolConfig, run_cycle
+from hylo.evolve.steering import SteeringRuleProposer, diagnose_traces
 
 ROOT = Path(__file__).resolve().parents[2]
 

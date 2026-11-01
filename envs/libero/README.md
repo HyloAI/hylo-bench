@@ -7,8 +7,8 @@ them through the EnvServer and AgentServer protocols, so none of these packages 
 ```bash
 scripts/install-osmesa-user.sh        # CPU offscreen rendering for MuJoCo, no root
 envs/libero/setup.sh                  # venv + LIBERO + LeRobot + assets + non-interactive LIBERO config
-uv run wc run examples/configs/libero_smolvla.yaml                                     # libero_spatial, 5 init states/task
-uv run wc run examples/configs/libero_smolvla.yaml --set benchmark.params.suite=libero_goal --set workers=16
+uv run hylo run examples/configs/libero_smolvla.yaml                                     # libero_spatial, 5 init states/task
+uv run hylo run examples/configs/libero_smolvla.yaml --set benchmark.params.suite=libero_goal --set workers=16
 ```
 
 What `setup.sh` works around (all inside this venv, nothing system-wide):
@@ -31,7 +31,7 @@ GPU rendering (`MUJOCO_GL=egl`) needs Mesa EGL and membership in the `render` gr
 
 ## Results and validation (2026-10-30, CPU, 5 init states per task = 50 episodes per suite)
 
-| Suite | worldcurrent harness | wall time (10 workers) |
+| Suite | Hylo harness | wall time (10 workers) |
 |---|---|---|
 | libero_spatial | 0.70 | 249 s |
 | libero_object | 0.66 | 147 s |
@@ -46,10 +46,10 @@ episodes differ between runs.
 ## Exporting traces as training data
 
 ```bash
-uv run wc run examples/configs/libero_smolvla.yaml --set trace.image_every=1      # per-step images are needed for video
-HF_HOME=envs/hf-home envs/libero/.venv/bin/python -m worldcurrent.policies.lerobot.export \
+uv run hylo run examples/configs/libero_smolvla.yaml --set trace.image_every=1      # per-step images are needed for video
+HF_HOME=envs/hf-home envs/libero/.venv/bin/python -m hylo.policies.lerobot.export \
     --runs runs/<run_dir> --out data/<name> [--only-success]
 ```
 Produces a LeRobotDataset (v3) with `observation.images.image|image2`, `observation.state` (8), `action` (7, as
-executed after the SafetyShield), `next.reward|done|success`, plus `worldcurrent_provenance.json` mapping each episode
+executed after the SafetyShield), `next.reward|done|success`, plus `hylo_provenance.json` mapping each episode
 back to its run, trace and agent version. Verified by reloading with `LeRobotDataset`.

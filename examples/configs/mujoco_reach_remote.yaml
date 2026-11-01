@@ -1,6 +1,6 @@
 # The MuJoCo reach experiment with the simulator in a separate process (EnvServer protocol). Set `runtime:` to a
 # runtime from this machine's profile to run an environment whose dependencies conflict with yours (LIBERO does this).
-schema_version: wc.experiment/v0.1
+schema_version: hylo.experiment/v0.1
 name: mujoco-reach-remote
 benchmark: {type: mujoco/reach-v0, split: validation}
 env: {type: mujoco.planar_reach, remote: {}}

@@ -18,7 +18,7 @@ import numpy as np  # noqa: E402
 from matplotlib.animation import FuncAnimation, PillowWriter  # noqa: E402
 from matplotlib.patches import Circle, Rectangle  # noqa: E402
 
-from worldcurrent.core.trace import EpisodeTrace  # noqa: E402
+from hylo.core.trace import EpisodeTrace  # noqa: E402
 
 L1, L2, PAD_R = 0.3, 0.25, 0.035
 

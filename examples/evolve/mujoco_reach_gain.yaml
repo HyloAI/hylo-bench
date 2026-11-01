@@ -1,7 +1,7 @@
 # A campaign on MuJoCo planar reach (about a minute): the IK controller starts with a weak gain, a rule generator
 # proposes larger and smaller gains, and the RFC-0002 gate (search_val selection, group-sequential gate,
-# held-out report) decides.   uv run wc evolve run examples/evolve/mujoco_reach_gain.yaml
-schema_version: wc.evolve/v0.1
+# held-out report) decides.   uv run hylo evolve run examples/evolve/mujoco_reach_gain.yaml
+schema_version: hylo.evolve/v0.1
 name: mujoco-reach-gain
 experiment: ../configs/mujoco_reach.yaml
 experiment_overrides: {agent.params.kp: 0.02, workers: 16, benchmark.params: {protocol: rsi, gate_looks: 2}}

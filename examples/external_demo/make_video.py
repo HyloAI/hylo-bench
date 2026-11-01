@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
-from worldcurrent.core.trace import TraceStore  # noqa: E402
+from hylo.core.trace import TraceStore  # noqa: E402
 
 W, H, FPS = 840, 512, 20
 BG, FG, MUTED, ACCENT = (24, 26, 30), (240, 240, 240), (160, 166, 176), (120, 220, 150)
@@ -153,7 +153,7 @@ def main() -> int:
     vlm = acts.get("3b VLM reasoner (camera image only) + memory", {})
     model = summary.get("model") or "LLM"
 
-    hold(card("worldcurrent: one harness for language, memory and self-improvement",
+    hold(card("Hylo: one harness for language, memory and self-improvement",
               ["Physical AI research stack: kernel-owned control loop, one SafetyShield for every action, "
                "replayable event traces, swappable reasoners, memory and policies.",
                f"This demo: MuJoCo simulation, local model {model} (Ollama), everything recorded and re-simulated from traces."],
