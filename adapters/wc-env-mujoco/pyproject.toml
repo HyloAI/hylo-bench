@@ -3,7 +3,7 @@ name = "wc-env-mujoco"
 version = "0.1.0.dev0"
 description = "worldcurrent MuJoCo environment adapter and task set"
 requires-python = ">=3.10"
-dependencies = ["wc-core", "wc-eval", "mujoco>=3.1"]
+dependencies = ["wc-core", "mujoco>=3.1"]
 license = "Apache-2.0"
 
 [build-system]
@@ -23,7 +23,6 @@ packages = ["src/worldcurrent"]
 
 [tool.uv.sources]
 wc-core = { workspace = true }
-wc-eval = { workspace = true }
 
 [project.entry-points."worldcurrent.meta"]
 "wc-env-mujoco" = "worldcurrent.envs.mujoco:META"

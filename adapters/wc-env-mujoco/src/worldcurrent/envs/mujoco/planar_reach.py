@@ -155,7 +155,7 @@ def splits_for(protocol: str, train: int, validation: int, heldout: int, rsi_sta
                gate_looks: int = 1) -> dict[str, tuple[int, ...]]:
     """protocol "standard": train / validation / heldout. protocol "rsi": search / search_val / gate / heldout
     (RFC-0002, 40 / 20 / 20 / 20 percent of `rsi_states` seeds) for improvement campaigns."""
-    from worldcurrent.eval.benchmark import rsi_splits, standard_splits
+    from worldcurrent.core.benchmark import rsi_splits, standard_splits
 
     if protocol == "rsi":
         n = rsi_states
@@ -166,7 +166,7 @@ def splits_for(protocol: str, train: int, validation: int, heldout: int, rsi_sta
 
 def mujoco_benchmark(train: int = 5, validation: int = 10, heldout: int = 10, protocol: str = "standard",
                      rsi_states: int = 100, gate_looks: int = 1):
-    from worldcurrent.eval.benchmark import Benchmark
+    from worldcurrent.core.benchmark import Benchmark
 
     return Benchmark(id="mujoco/reach-v0", version="0.1", tasks=mujoco_tasks(),
                      splits=splits_for(protocol, train, validation, heldout, rsi_states, gate_looks))

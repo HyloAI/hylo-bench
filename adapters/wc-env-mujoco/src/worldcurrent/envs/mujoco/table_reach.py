@@ -249,7 +249,7 @@ def table_benchmark(tags: list[str] | None = None, train: int = 10, validation: 
                     vision: bool = False, protocol: str = "standard", rsi_states: int = 100, gate_looks: int = 1):
     """vision=True adds a top-camera image to observations while pads are visible (needs MuJoCo rendering).
     Task ids stay the same so results pair with the state-only variant seed by seed."""
-    from worldcurrent.eval.benchmark import Benchmark
+    from worldcurrent.core.benchmark import Benchmark
 
     from .planar_reach import splits_for
 

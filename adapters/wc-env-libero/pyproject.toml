@@ -3,7 +3,7 @@ name = "wc-env-libero"
 version = "0.1.0.dev0"
 description = "worldcurrent LIBERO environment adapter (runs out of process in its own venv) and LIBERO benchmarks"
 requires-python = ">=3.10"
-dependencies = ["wc-core", "wc-eval"]
+dependencies = ["wc-core"]
 license = "Apache-2.0"
 
 [build-system]
@@ -21,7 +21,6 @@ packages = ["src/worldcurrent"]
 
 [tool.uv.sources]
 wc-core = { workspace = true }
-wc-eval = { workspace = true }
 
 [project.entry-points."worldcurrent.meta"]
 "wc-env-libero" = "worldcurrent.envs.libero:META"

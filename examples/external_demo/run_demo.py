@@ -56,7 +56,7 @@ from worldcurrent.core.trace import TraceStore  # noqa: E402
 from worldcurrent.core.types import Action  # noqa: E402
 from worldcurrent.envs.mujoco.table_reach import TableReachEnv, table_tasks  # noqa: E402
 from worldcurrent.evolve.candidate import Candidate, CandidateRegistry  # noqa: E402
-from worldcurrent.evolve.loop import GainRuleGenerator, improvement_cycle  # noqa: E402
+from worldcurrent.evolve.loop import GainProposer, improvement_cycle  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from replay2d import render_episode_gif  # noqa: E402
@@ -213,13 +213,13 @@ def main() -> int:
                       {"tags": ["recovery"], **bench})
     registry = CandidateRegistry(out / "registry")
 
-    class WithAdversary(GainRuleGenerator):
+    class WithAdversary(GainProposer):
         name = "rule.gain+adversary@0.1"
 
-        def propose(self, report, cfg, parent_id):
-            return [Candidate(patch={"safety.max_delta": 10.0}, parent_id=parent_id, generator=self.name,
-                              rationale="converge faster by removing the action rate limit"),
-                    *super().propose(report, cfg, parent_id)]
+        def propose(self, diagnosis, cfg, parent_id, archive):
+            bad = Candidate(patch={"safety.max_delta": 10.0}, parent_id=parent_id, generator=self.name,
+                            rationale="converge faster by removing the action rate limit")
+            return [(bad, bad.rationale), *super().propose(diagnosis, cfg, parent_id, archive)]
 
     rsi_evals: dict[str, EvalResult] = {}
 
@@ -230,7 +230,7 @@ def main() -> int:
             f"shield={r.metrics['safety_interventions_mean']:.2f}")
         return r
 
-    cycle = improvement_cycle(rsi_base, registry, WithAdversary(factors=(2.0, 4.0, 8.0, 16.0)), evaluate,
+    cycle = improvement_cycle(rsi_base, registry, WithAdversary(factors=(2.0, 4.0, 8.0, 16.0), adaptive=True), evaluate,
                               gate_kwargs={"max_safety_increase": 1.0})
     promoted_patch = registry.effective_patch()
     rolled_back_to = registry.rollback(reason="demo: simulated field regression report", by="operator")

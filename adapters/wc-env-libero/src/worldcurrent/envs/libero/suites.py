@@ -38,11 +38,11 @@ def libero_benchmark(suite: str = "libero_spatial", n_validation: int = 25, n_he
     """protocol="standard": validation / heldout over the official 50 init states.
     protocol="rsi": search / search_val / gate / heldout (RFC-0002), with `replicates` noise replicates per
     init state (seed + 50 r: same init state, different policy noise)."""
-    from worldcurrent.eval.benchmark import Benchmark
+    from worldcurrent.core.benchmark import Benchmark
 
     tasks = libero_tasks(suite, task_indices)
     if protocol == "rsi":
-        from worldcurrent.eval.benchmark import rsi_splits
+        from worldcurrent.core.benchmark import rsi_splits
 
         return Benchmark(id=f"libero/{suite}", version="0.1", tasks=tasks,
                          splits=rsi_splits(50, tuple(rsi_bounds), replicates, gate_looks),

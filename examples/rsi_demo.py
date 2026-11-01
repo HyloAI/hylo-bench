@@ -16,16 +16,16 @@ from pathlib import Path
 from worldcurrent.eval.experiment import run_experiment
 from worldcurrent.core.config import ExperimentConfig
 from worldcurrent.evolve.candidate import Candidate, CandidateRegistry
-from worldcurrent.evolve.loop import GainRuleGenerator, improvement_cycle
+from worldcurrent.evolve.loop import GainProposer, improvement_cycle
 
 
-class WithAdversary(GainRuleGenerator):
+class WithAdversary(GainProposer):
     name = "rule.gain+adversary@0.1"
 
-    def propose(self, report, cfg, parent_id):
-        return [Candidate(patch={"safety.max_delta": 10.0}, parent_id=parent_id, generator=self.name,
-                          rationale="faster convergence if the rate limit is removed"),
-                *super().propose(report, cfg, parent_id)]
+    def propose(self, diagnosis, cfg, parent_id, archive):
+        bad = Candidate(patch={"safety.max_delta": 10.0}, parent_id=parent_id, generator=self.name,
+                        rationale="faster convergence if the rate limit is removed")
+        return [(bad, bad.rationale), *super().propose(diagnosis, cfg, parent_id, archive)]
 
 
 runs_dir = Path(__file__).resolve().parents[1] / "runs"
@@ -43,7 +43,7 @@ def evaluate(c, split, label):
 
 
 print(f"workspace: {root}")
-rep = improvement_cycle(cfg, registry, WithAdversary(), evaluate)
+rep = improvement_cycle(cfg, registry, WithAdversary(factors=(2.0, 4.0, 8.0), adaptive=True), evaluate)
 print("\ndiagnosis:", rep.diagnosis.buckets)
 for e in rep.evaluated:
     verdict = e.get("rejected") or ("PASS" if e["gate"]["passed"] else "FAIL: " + "; ".join(e["gate"]["reasons"]))
