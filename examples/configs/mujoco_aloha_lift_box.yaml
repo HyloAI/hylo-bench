@@ -1,0 +1,10 @@
+# Two ViperX arms at a table (mujoco/bimanual-v0, RFC-0006 part 3): lift a box too wide for one gripper by its two end handles, with both arms, and hold it level.
+# The privileged oracle (object poses from the simulator) is the upper bound for this task; tool-using agents run
+# with cameras instead: env params {cameras: [overhead, front, left_wrist, right_wrist], segmentation: true} need
+# MUJOCO_GL=egl or osmesa.
+schema_version: hylo.experiment/v0.1
+name: mujoco-aloha-lift-box
+benchmark: {type: mujoco/bimanual-v0, params: {tasks: [lift_box]}, split: validation}
+env: {type: mujoco.aloha_table, params: {cameras: [], privileged_obs: true}}
+agent: {type: oracle.aloha_table}
+output_dir: runs

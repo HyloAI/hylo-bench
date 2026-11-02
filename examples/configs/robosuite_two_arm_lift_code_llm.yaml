@@ -1,0 +1,21 @@
+# robosuite TwoArmLift with the robot contract: two Pandas (arms robot0 and robot1, facing each other) lift a pot by its
+# two handles, driven by a code-writing chat model through the multi-arm toolkit (robot.run({...}, sync=True)).
+# The world frame is robot0's base frame; robot1's base is in its ArmSpec.base_in_world.
+schema_version: hylo.experiment/v0.1
+name: robosuite-two-arm-lift-code-llm
+benchmark: {type: robosuite, split: validation, params: {tasks: [two_arm_lift], validation: 3}}
+env:
+  type: robosuite
+  params: {task: two_arm_lift, segmentation: true}
+  remote: {runtime: robosuite-sim}
+agent:
+  type: code.llm
+  params:
+    model: {backend: ollama, model: "qwen3.5:35b-a3b", vision: true, reasoning_effort: none, max_tokens: 3000,
+            timeout_s: 2400, retries: 1}
+    max_turns: 16
+    block_timeout_s: 120
+    act_wait_s: 7200
+trace: {record_privileged: false, image_every: 0}
+workers: 1
+output_dir: runs

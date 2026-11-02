@@ -1,0 +1,9 @@
+# Franka Panda at a table (mujoco/manip-v0, RFC-0006 part 3): push a box too wide to grasp into a named zone.
+# The privileged oracle (object poses from the simulator) is the upper bound for this task; tool-using agents run
+# with cameras instead: env params {cameras: [front, side, wrist], segmentation: true} need MUJOCO_GL=egl or osmesa.
+schema_version: hylo.experiment/v0.1
+name: mujoco-panda-push-to-zone
+benchmark: {type: mujoco/manip-v0, params: {tasks: [push_to_zone]}, split: validation}
+env: {type: mujoco.panda_table, params: {cameras: [], privileged_obs: true}}
+agent: {type: oracle.panda_table}
+output_dir: runs

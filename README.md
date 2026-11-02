@@ -25,6 +25,11 @@ Part of [Hylo](https://hyloai.github.io/), the stack for physical AI. This repos
 Benchmarking for Hylo: run a policy under a fixed **protocol** and get a **scorecard**; rank scorecards on
 **leaderboards** and compare two of them episode by episode. Built on the harness's evaluation engine (hylo-eval).
 
+Bench provides development environments and validation evidence for robot skills. Try a task implementation,
+inspect its execution, then evaluate a frozen version on separate cases. Each result states the robot, tasks,
+observations and protocol it covers. Development runs and independent validation serve different purposes.
+See [Robot skills and their lifecycle](https://hyloai.github.io/hylo-docs/user-guide/skills/).
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset=".github/assets/flow-dark.svg">
@@ -35,10 +40,12 @@ Benchmarking for Hylo: run a policy under a fixed **protocol** and get a **score
 | Path | What it is |
 |---|---|
 | `packages/hylo-bench` | protocols (hylo.protocol/v0.1), `hylo bench`, leaderboards, pairwise comparison; scorecards are `core.scorecard` (hylo.scorecard/v0.1) |
-| `adapters/hylo-env-libero` | LIBERO suites as benchmarks; the simulator runs in its own venv (`envs/libero`) |
-| `adapters/hylo-env-mujoco` | MuJoCo planar-reach and table-reach environments and benchmarks |
+| `adapters/hylo-env-libero` | LIBERO suites as benchmarks, with seven perturbations (position, task, language, object, camera, noise, robot start); the simulator runs in its own venv (`envs/libero`) |
+| `adapters/hylo-env-mujoco` | MuJoCo planar-reach and table-reach environments and benchmarks; `mujoco.panda_table` (Franka Panda, RGB-D cameras, optional segmentation) with `mujoco/manip-v0` (pick-place, stack, bowl, push, numbered buttons, colour sort) and the privileged oracle `oracle.panda_table`; stage worlds (`mujoco.world` tools): 24 robot packs, actions with receipts, checks with reason codes, people, pretrained walking policies, dataset export |
 | `envs/libero` | the LIBERO + LeRobot venv (`setup.sh`, CPU, no root); needs `scripts/install-osmesa-user.sh` |
-| `examples/` | experiment configs and campaigns on these suites (MuJoCo reach / table, LIBERO-10), the reference-policy leaderboard (`policies/`), the RSI demo, the RSI scripts for LIBERO-10, the MuJoCo external demo |
+| `packages/hylo-robosuite-contract` | robot-contract machinery shared by the robosuite and RoboCasa adapters |
+| `adapters/hylo-env-robosuite`, `adapters/hylo-env-robocasa` | manipulation and kitchen environments; setup under `envs/robosuite` and `envs/robocasa` |
+| `examples/` | experiment configs and campaigns on these suites (MuJoCo reach / table, LIBERO-10), the reference-policy leaderboard (`policies/`), the RSI demo, the RSI scripts for LIBERO-10, the MuJoCo external demo, `showcase/` (four scripts with measured results) |
 
 ## Suites
 
@@ -52,7 +59,23 @@ Benchmarking for Hylo: run a policy under a fixed **protocol** and get a **score
 LIBERO-10 with SmolVLA (top, one recorded episode) and the two MuJoCo environments (bottom): planar reach, a
 two-link arm and a target, and table reach, with language goals, occlusion memory and disturbances.
 
-## Protocols
+## Development environments
+
+For manipulation development, MuJoCo also provides Panda (`mujoco/manip-v0`), ALOHA (`mujoco/bimanual-v0`) and
+fixed-base G1 (`mujoco/humanoid-v0`) tasks. All three have recorded program evaluations. LIBERO exposes the robot
+contract for tool-using agents. robosuite and RoboCasa have adapter/interface checks; their formal program success-rate
+evaluations remain unrun. See [MuJoCo tasks](adapters/hylo-env-mujoco/README.md) and the
+[development guide](https://hyloai.github.io/hylo-docs/user-guide/developing-strategies/).
+
+## Worlds
+
+`hylo.envs.mujoco.world` builds a stage (`hylo.stage/v0.1`) into a MuJoCo simulation: arms, grippers, hands,
+quadrupeds, humanoids, drones and a mobile manipulator from 24 packs (MuJoCo Menagerie and Unitree's training
+models, fetched at pinned commits and checked by digest), cameras, lights and people. The `mujoco.world` tool surface
+serves it to chat models, coding agents (MCP) and the Studio. Recordings: `adapters/hylo-env-mujoco/examples/world/`.
+See [Worlds](https://hyloai.github.io/hylo-docs/user-guide/worlds/).
+
+## Evaluation protocols
 
 A protocol is everything about an evaluation except the policy: benchmark and split, environment, safety limits,
 trace options, seed. Its digest covers only what is measured, so two scorecards with the same digest are

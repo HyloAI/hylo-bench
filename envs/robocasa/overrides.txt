@@ -1,0 +1,11 @@
+# RoboCasa declares training / teleoperation dependencies that environment workers never import; they pull torch and
+# need system headers. Excluded here (CPU, headless).
+lerobot ; sys_platform == "never"
+tianshou ; sys_platform == "never"
+opencv-python ; sys_platform == "never"
+pynput ; sys_platform == "never"
+hidapi ; sys_platform == "never"
+pygame ; sys_platform == "never"
+# RoboCasa pins numba 0.61.2, whose llvmlite (LLVM 15) crashes inside a process that has loaded OSMesa's LLVM 20
+# (software rendering); numba 0.68's llvmlite is built on LLVM 20.
+numba==0.68.1

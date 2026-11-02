@@ -1,0 +1,10 @@
+# Two ViperX arms at a table (mujoco/bimanual-v0, RFC-0006 part 3): put each block in the bin on its side, both arms at once, within a step limit that one-after-the-other motions miss.
+# The privileged oracle (object poses from the simulator) is the upper bound for this task; tool-using agents run
+# with cameras instead: env params {cameras: [overhead, front, left_wrist, right_wrist], segmentation: true} need
+# MUJOCO_GL=egl or osmesa.
+schema_version: hylo.experiment/v0.1
+name: mujoco-aloha-two-bins
+benchmark: {type: mujoco/bimanual-v0, params: {tasks: [two_bins]}, split: validation}
+env: {type: mujoco.aloha_table, params: {cameras: [], privileged_obs: true}}
+agent: {type: oracle.aloha_table}
+output_dir: runs

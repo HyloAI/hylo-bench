@@ -1,0 +1,9 @@
+# Unitree G1 humanoid at a table (mujoco/humanoid-v0, RFC-0006 part 3): pick up the named block with one three-finger hand (a claw from above) and put it on the named plate.
+# The privileged oracle (object poses from the simulator) is the upper bound for this task; tool-using agents run
+# with cameras instead: env params {cameras: [head, front], segmentation: true} need MUJOCO_GL=egl or osmesa.
+schema_version: hylo.experiment/v0.1
+name: mujoco-g1-pick-place
+benchmark: {type: mujoco/humanoid-v0, params: {tasks: [pick_place]}, split: validation}
+env: {type: mujoco.g1_table, params: {cameras: [], privileged_obs: true}}
+agent: {type: oracle.g1_table}
+output_dir: runs

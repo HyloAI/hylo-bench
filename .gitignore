@@ -8,3 +8,6 @@ envs/*/.venv/
 envs/*/assets/
 envs/*/config/
 envs/hf-home/
+envs/robocasa/src-robocasa/
+envs/robocasa/downloads/
+envs/robocasa/numba-cache/

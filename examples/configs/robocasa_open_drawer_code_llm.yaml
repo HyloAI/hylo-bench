@@ -1,0 +1,23 @@
+# RoboCasa OpenDrawer with the robot contract (hylo-env-robocasa): a code-writing chat model drives the PandaOmron's arm
+# (the mobile base stays put) through the hylo-manip toolkit (cameras, depth, segmentation; no privileged state).
+# One task per experiment (env.params.task). The simulator runs out of process in this machine's robocasa-sim runtime
+# (bench's envs/robocasa/setup.sh builds the venv, fetches RoboCasa's assets and registers it).
+# Programs instead of a model: adapters/hylo-env-robocasa/examples/run.py programs.
+schema_version: hylo.experiment/v0.1
+name: robocasa-open-drawer-code-llm
+benchmark: {type: robocasa, split: validation, params: {tasks: [open_drawer], validation: 3}}
+env:
+  type: robocasa
+  params: {task: open_drawer, segmentation: true}
+  remote: {runtime: robocasa-sim}
+agent:
+  type: code.llm
+  params:
+    model: {backend: ollama, model: "qwen3.5:35b-a3b", vision: true, reasoning_effort: none, max_tokens: 3000,
+            timeout_s: 2400, retries: 1}
+    max_turns: 16
+    block_timeout_s: 120
+    act_wait_s: 7200
+trace: {record_privileged: false, image_every: 0}
+workers: 1
+output_dir: runs

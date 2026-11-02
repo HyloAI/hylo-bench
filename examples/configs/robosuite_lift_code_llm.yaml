@@ -1,0 +1,24 @@
+# robosuite Lift with the robot contract (hylo-env-robosuite): a code-writing chat model drives the Panda through the
+# hylo-manip toolkit (cameras, depth, segmentation; no privileged state). One task per experiment: env.params.task
+# names it (the RobotSpec depends on the task). The simulator runs out of process in this machine's robosuite-sim
+# runtime (bench's envs/robosuite/setup.sh builds the venv and registers it).
+# Programs instead of a model: agent {type: code.program, params: {source: <a solve(robot) program>}};
+# adapters/hylo-env-robosuite/examples/programs/run_programs.py runs them on every task.
+schema_version: hylo.experiment/v0.1
+name: robosuite-lift-code-llm
+benchmark: {type: robosuite, split: validation, params: {tasks: [lift], validation: 3}}
+env:
+  type: robosuite
+  params: {task: lift, segmentation: true}          # + privileged_obs: true for object poses in extra
+  remote: {runtime: robosuite-sim}
+agent:
+  type: code.llm
+  params:
+    model: {backend: ollama, model: "qwen3.5:35b-a3b", vision: true, reasoning_effort: none, max_tokens: 3000,
+            timeout_s: 2400, retries: 1}
+    max_turns: 16
+    block_timeout_s: 120
+    act_wait_s: 7200
+trace: {record_privileged: false, image_every: 0}
+workers: 1
+output_dir: runs

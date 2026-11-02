@@ -43,6 +43,14 @@ scored 0.64 (32/50) against our 0.70 (35/50); the difference is not significant 
 pattern matches (tasks 4 and 5 are the hardest in both). SmolVLA samples actions stochastically, so individual
 episodes differ between runs.
 
+## Robot contract for tool-using agents (RFC-0006)
+
+`env.params: {control: joint_position, tool_obs: true, segmentation: true}` gives joint-position control, RGB-D with
+camera intrinsics and poses, labelled instance segmentation and `EnvSpec.robot` (the Panda exported from robosuite
+into `$HYLO_ASSETS/libero/panda/`), for `code.program` / `code.llm` agents and the hylo-manip toolkit. The default
+mode above is unchanged. Programs, results against SmolVLA, `code.llm` runs and videos:
+`adapters/hylo-env-libero/examples/README.md`.
+
 ## Exporting traces as training data
 
 ```bash
