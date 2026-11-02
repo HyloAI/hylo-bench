@@ -123,7 +123,7 @@ def compose(stage: Stage, root: str | Path = ".") -> Composed:
     spec.visual.headlight.diffuse = [0.5, 0.5, 0.5]
     far = max([float(np.linalg.norm(e.pose.pos[:2])) for e in stage.entities] + [1.0])
     spec.stat.extent = max(3.0, 2.0 * far + 1.0)         # the shadow map covers this much of the scene
-    spec.visual.map.shadowclip = 3.0
+    spec.visual.map.shadowclip = 6.0                    # no shadow-map speckles on the far floor
     spec.visual.quality.shadowsize = 4096
     spec.visual.map.znear = 0.01
     spec.add_texture(name="hylo_sky", type=mujoco.mjtTexture.mjTEXTURE_SKYBOX, builtin=mujoco.mjtBuiltin.mjBUILTIN_GRADIENT,
