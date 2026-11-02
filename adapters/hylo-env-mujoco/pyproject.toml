@@ -1,7 +1,7 @@
 [project]
 name = "hylo-env-mujoco"
 version = "0.1.0.dev0"
-description = "Hylo MuJoCo environment adapter and task set"
+description = "Hylo MuJoCo environments and task sets: planar and table reach, Franka Panda manipulation, two-arm and humanoid tables"
 requires-python = ">=3.10"
 dependencies = ["hylo-core", "mujoco>=3.1"]
 license = "Apache-2.0"
@@ -16,13 +16,32 @@ packages = ["src/hylo"]
 [project.entry-points."hylo.envs"]
 "mujoco.planar_reach" = "hylo.envs.mujoco.planar_reach:PlanarReachEnv"
 "mujoco.table_reach" = "hylo.envs.mujoco.table_reach:TableReachEnv"
+"mujoco.panda_table" = "hylo.envs.mujoco.panda_table:PandaTableEnv"
+"mujoco.panda_scene" = "hylo.envs.mujoco.panda_scene:PandaSceneEnv"
+"mujoco.aloha_table" = "hylo.envs.mujoco.aloha_table:AlohaTableEnv"
+"mujoco.g1_table" = "hylo.envs.mujoco.g1_table:G1TableEnv"
+"mujoco.free_scene" = "hylo.envs.mujoco.free_scene:FreeSceneEnv"
+"mujoco.dex_table" = "hylo.envs.mujoco.dex_table:DexTableEnv"
 
 [project.entry-points."hylo.benchmarks"]
 "mujoco/reach-v0" = "hylo.envs.mujoco.planar_reach:mujoco_benchmark"
 "mujoco/table-v0" = "hylo.envs.mujoco.table_reach:table_benchmark"
+"mujoco/manip-v0" = "hylo.envs.mujoco.manip_tasks:manip_benchmark"
+"mujoco/scenes-v0" = "hylo.envs.mujoco.panda_scene:scene_benchmark"
+"mujoco/bimanual-v0" = "hylo.envs.mujoco.bimanual_tasks:bimanual_benchmark"
+"mujoco/humanoid-v0" = "hylo.envs.mujoco.humanoid_tasks:humanoid_benchmark"
+"mujoco/dexterous-v0" = "hylo.envs.mujoco.dex_tasks:dexterous_benchmark"
+
+[project.entry-points."hylo.agents"]
+"oracle.panda_table" = "hylo.envs.mujoco.oracle:PandaOracle"
+"oracle.aloha_table" = "hylo.envs.mujoco.aloha_oracle:AlohaOracle"
+"oracle.g1_table" = "hylo.envs.mujoco.g1_oracle:G1Oracle"
 
 [tool.uv.sources]
 hylo-core = { workspace = true }
 
 [project.entry-points."hylo.meta"]
 "hylo-env-mujoco" = "hylo.envs.mujoco:META"
+
+[project.entry-points."hylo.surfaces"]
+"mujoco.world" = "hylo.envs.mujoco.world_tools:WorldSurface"

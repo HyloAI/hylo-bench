@@ -1,0 +1,22 @@
+{
+ "source": "https://github.com/google-deepmind/mujoco_menagerie",
+ "commit": "b0655057a9df2abe39ea7fc989914ba6f248301c",
+ "folder": "trossen_vx300s",
+ "license": "BSD-3-Clause",
+ "sha256": {
+  "LICENSE": "21868447315ac2b10e592d08958c1035b19a32cf39e9165b23033f68390098cb",
+  "assets/interbotix_black.png": "4cd224156bbaab1ddf1b92b90d46c54835a8b41f61bc258b2f216c2618e062cf",
+  "assets/vx300s_10_gripper_finger.stl": "a4baacd9a64df1be60ea5e98f50f3c660e1b7a1fe9684aace6004c5058c09483",
+  "assets/vx300s_1_base.stl": "d100cafe656671ca8fde98fb6a4cf2d1b746995c51c61c25ad9ea2715635d146",
+  "assets/vx300s_2_shoulder.stl": "139745a74055cb0b23430bb5bc032bf68cf7bea5e4975c8f4c04107ae005f7f0",
+  "assets/vx300s_3_upper_arm.stl": "900f236320dd3d500870c5fde763b2d47502d51e043a5c377875e70237108729",
+  "assets/vx300s_4_upper_forearm.stl": "4104fc54bbfb8a9b533029f1e7e3ade3d54d638372b3195daa0c98f57e0295b5",
+  "assets/vx300s_5_lower_forearm.stl": "66814e27fa728056416e25e02e89eb7d34c51d51c51e7c3df873829037ddc6b8",
+  "assets/vx300s_6_wrist.stl": "90eb145c85627968c3776ae6de23ccff7e112c9dd713c46bc9acdfdaa859a048",
+  "assets/vx300s_7_gripper.stl": "786c1077bfd226f14219581b11d5f19464ca95b17132e0bb7532503568f5af90",
+  "assets/vx300s_8_gripper_prop.stl": "d1275a93fe2157c83dbc095617fb7e672888bdd48ec070a35ef4ab9ebd9755b0",
+  "assets/vx300s_9_gripper_bar.stl": "a4de62c9a2ed2c78433010e4c05530a1254b1774a7651967f406120c9bf8973e",
+  "scene.xml": "b7ef8a5bbd16af7f7de690f5ad3e5fabc7825b7df40b0613af9910e416f9c377",
+  "vx300s.xml": "d6202f119c53c4969b1a1ca1256e26a540964203fe62ad5d9a496592305f85ec"
+ }
+}

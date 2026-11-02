@@ -17,30 +17,50 @@ INDEX = Path(__file__).with_name("suites.json")
 MAX_STEPS = {"libero_spatial": 280, "libero_object": 280, "libero_goal": 300, "libero_10": 520, "libero_90": 400}
 
 
-def libero_tasks(suite: str, task_indices: list[int] | None = None):
+def libero_tasks(suite: str, task_indices: list[int] | None = None, perturb=None):
+    """Tasks of a suite; with `perturb` (a kind, a list of kinds, or a list of lists: one variant per entry) every
+    task becomes one perturbed variant per entry, id `libero/<suite>/<name>+<kinds>` (see perturb.py). Tasks without
+    a goal rewrite are left out of `task` variants."""
     from hylo.core.task import InitStateRef, Predicate, TaskSpec
+
+    from .perturb import kinds, variants
 
     rows = json.loads(INDEX.read_text())[suite]
     if task_indices is not None:
         rows = [r for r in rows if r["task_index"] in task_indices]
-    return tuple(
-        TaskSpec(id=f"libero/{suite}/{r['name']}", version="1", instruction=r["language"],
-                 init=InitStateRef(uri=f"libero://{suite}/{r['name']}", count=r["n_init_states"]),
-                 success=Predicate(kind="expr", name="bddl_goal", expr=r["goal"]),
-                 max_steps=MAX_STEPS.get(suite, 400),
-                 params={"suite": suite, "task_index": r["task_index"]}, tags=("libero", suite))
-        for r in rows)
+    groups: list[tuple[str, ...]] = [()]
+    if perturb:
+        items = [perturb] if isinstance(perturb, str) else list(perturb)
+        groups = [kinds(g) for g in items]
+    table = variants().get(suite, {}) if any("task" in g for g in groups) else {}
+    out = []
+    for g in groups:
+        for r in rows:
+            instruction, goal = r["language"], r["goal"]
+            if "task" in g:
+                v = (table.get(str(r["task_index"])) or {}).get("task")
+                if v is None:
+                    continue
+                instruction, goal = v["language"], v["goal"]
+            suffix = ("+" + "+".join(g)) if g else ""
+            params = {"suite": suite, "task_index": r["task_index"], **({"perturb": list(g)} if g else {})}
+            out.append(TaskSpec(id=f"libero/{suite}/{r['name']}{suffix}", version="1", instruction=instruction,
+                                init=InitStateRef(uri=f"libero://{suite}/{r['name']}", count=r["n_init_states"]),
+                                success=Predicate(kind="expr", name="bddl_goal", expr=goal),
+                                max_steps=MAX_STEPS.get(suite, 400), params=params,
+                                tags=("libero", suite, *(("perturbed", *g) if g else ()))))
+    return tuple(out)
 
 
 def libero_benchmark(suite: str = "libero_spatial", n_validation: int = 25, n_heldout: int = 25,
                      task_indices: list[int] | None = None, protocol: str = "standard", replicates: int = 1,
-                     rsi_bounds: tuple[int, int, int] = (20, 30, 40), gate_looks: int = 1):
+                     rsi_bounds: tuple[int, int, int] = (20, 30, 40), gate_looks: int = 1, perturb=None):
     """protocol="standard": validation / heldout over the official 50 init states.
     protocol="rsi": search / search_val / gate / heldout (RFC-0002), with `replicates` noise replicates per
     init state (seed + 50 r: same init state, different policy noise)."""
     from hylo.core.benchmark import Benchmark
 
-    tasks = libero_tasks(suite, task_indices)
+    tasks = libero_tasks(suite, task_indices, perturb)
     if protocol == "rsi":
         from hylo.core.benchmark import rsi_splits
 

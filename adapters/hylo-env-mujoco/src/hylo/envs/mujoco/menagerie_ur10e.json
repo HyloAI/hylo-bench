@@ -1,0 +1,31 @@
+{
+ "source": "https://github.com/google-deepmind/mujoco_menagerie",
+ "commit": "b0655057a9df2abe39ea7fc989914ba6f248301c",
+ "folder": "universal_robots_ur10e",
+ "license": "BSD-3-Clause",
+ "sha256": {
+  "LICENSE": "5ec71ccf66c8d03261448f2441a586765b97f2248c860a1ae19689fb1c45cee6",
+  "assets/base_0.obj": "bf32c8c773792ef5d77733faca78f76aac09253d1f27e5d6550d016de7c71805",
+  "assets/base_1.obj": "849a788074d7670d9ba736f80b36622777d533eff883ccc973c916e1662a4fc1",
+  "assets/forearm_0.obj": "7bdcfc8879ee27eedbcf9bda49133209a8988869ca810abed12510da52aec6ce",
+  "assets/forearm_1.obj": "add3f9150c7a39f9619d7a13cb730f836b0f5bb0538d22998b2ef2531ccb231d",
+  "assets/forearm_2.obj": "e7a4ef8ebc423dc89f3b709de5331e6546ba619515ab4e9f4173e1c4df50928c",
+  "assets/forearm_3.obj": "7963bc45f0caa7891e16e0e3aaf1b8255ccb31c45eb2e7189ae41ab79d769c6c",
+  "assets/shoulder_0.obj": "dc2cb7d3c9a89fd5a7cc954f72448e0b096b8a55bd2552fbb5012cb63a8665ad",
+  "assets/shoulder_1.obj": "29300890574301e471272b609462df7ce4c740c94b28d5d397742344884034dd",
+  "assets/shoulder_2.obj": "c9d28de31d417e478e807ac181ca713ae85cd3e2ec7e2ee59411ffa441a1ea7c",
+  "assets/upperarm_0.obj": "443e65b87bd6494ce60e1020750b8d12d75fb647b15a0a20c46cf6bcdd367189",
+  "assets/upperarm_1.obj": "1faf80f2049a7d5f423ee5cb64b3660ffe7a7268952e547e0c41b0d8a8381280",
+  "assets/upperarm_2.obj": "6bcadcbab26e2c93b6e6d1148d9f1ec3afbaed601d4b1c33e3ac655cd2713fce",
+  "assets/upperarm_3.obj": "19b05ed2b694965b8aae32495297223f03c2c0fa21db9baa5283f3225abcc311",
+  "assets/wrist1_0.obj": "29c7986338deaaac9c08e178cae1f6a6b72d35baeab9e431e0c9e0c94ad098d9",
+  "assets/wrist1_1.obj": "793966ed9435327bbf6321bf519b20b5a5fc224af7b6cc3d77c5aa55facd97a2",
+  "assets/wrist1_2.obj": "9f4ee5635420d34e25a4daa776a5c2eb0b9b5b16e952b98f298eee77bf9755aa",
+  "assets/wrist2_0.obj": "a0a095dcd76a4658124530de86c5fe578d7a82d0dd2843345f75f2c37951d4b5",
+  "assets/wrist2_1.obj": "613d0933859d74cef3afce04023c7bec7e600fef8461bd5a8fa687fc73b5297c",
+  "assets/wrist2_2.obj": "8c3a94f34998629636c0b947d6f0122dbb675e51fa8885502d20cc1d7fdb7a3c",
+  "assets/wrist3.obj": "7d125e3585fe8a208042ea1dfd39e178efa946604e0e89c4f7dc1467a6354b22",
+  "scene.xml": "fc50163a7d83af12d950bddc4df7ff61817895540922a40d23b5855f372888d3",
+  "ur10e.xml": "a8f709df340788033d497ff7d892fdecab4f6cc9c36299a00f57efa9f25e0744"
+ }
+}

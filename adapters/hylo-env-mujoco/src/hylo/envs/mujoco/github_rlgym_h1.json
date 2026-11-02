@@ -1,0 +1,35 @@
+{
+ "source": "https://github.com/unitreerobotics/unitree_rl_gym",
+ "repo": "unitreerobotics/unitree_rl_gym",
+ "commit": "276801e46c5d433564f24658bac64f254b7d2d4b",
+ "folder": "resources/robots/h1",
+ "license": "BSD-3-Clause",
+ "paths": {
+  "LICENSE": "LICENSE"
+ },
+ "sha256": {
+  "h1.xml": "2bee8abddbf4bc093bcdb2266c7139cd1c78e279bf65f7ee9fde41fe599900d4",
+  "meshes/left_ankle_link.STL": "2d403f5414764e600af95d96eaee8ab7e49d2c7f75c1ae3dbbde052d4a14ffa1",
+  "meshes/left_elbow_link.STL": "5ccf9bc83a751c1965b692e75534e57ee3c8a0916cbcff2ccccd8fe2b9d818d7",
+  "meshes/left_hip_pitch_link.STL": "aa790c31ffc100cd182f2bf4480e7bfda675edc58ed8f361b6553a4975c9de3b",
+  "meshes/left_hip_roll_link.STL": "8ed880cf1171e048cfe50489fe2546c32790ac0c24a2b3b4c560495401013552",
+  "meshes/left_hip_yaw_link.STL": "103a854e684b84e1baba7d073822079069c64d0fa7b1592f29d38bd29f545bfb",
+  "meshes/left_knee_link.STL": "efda8a6c54406c788102c0d6e59ea95e24114607bc2da9a2bf7f287ef7e48109",
+  "meshes/left_shoulder_pitch_link.STL": "42e1db49464ca0f44f933114ee426e7f6d6310d20cf104bfa38b5ed4794cfab7",
+  "meshes/left_shoulder_roll_link.STL": "8d3bcf767d72a9a5d7dae539eae79dc4132f0159b8803a6f6f2f9ad4b7e94d19",
+  "meshes/left_shoulder_yaw_link.STL": "e22a5b53f8f307e6c5d6c17f9ceae4852c6468547a951cb39dfdec9ee414b515",
+  "meshes/logo_link.STL": "ef9635c847ca7cd61aeaed86ad599935b648fb6f8688867c0448917b1811511b",
+  "meshes/pelvis.STL": "dc2cbbeb07d3b63bce9fedeb8cf5252609dca1e89380734d22d5b3c8ded2f15c",
+  "meshes/right_ankle_link.STL": "b39f5b3245926e935b9b37bdf25080d482d3be921aa5d70e01fe5f29ef70910a",
+  "meshes/right_elbow_link.STL": "bc1b2aa33cffda279b3e6a40b5b932b86de9cce6c41f0c0d860b442e81edcdc2",
+  "meshes/right_hip_pitch_link.STL": "3c0300dd96432f218857886007e9d4e8be038cd8b85e04e84a59df4de7f90476",
+  "meshes/right_hip_roll_link.STL": "3e95b01b0a215e1d134545d4073cf7a72ab38ca33e35c606c03f1706d63588c6",
+  "meshes/right_hip_yaw_link.STL": "10badbb0ac78e22fc220f421b1c919cfcf59406b412d78313e4b8b06cbc51e47",
+  "meshes/right_knee_link.STL": "6183abbaef2afc775c220853e403b8479022a99954dbeef829b39d71916ddeda",
+  "meshes/right_shoulder_pitch_link.STL": "850ffa7321993bfadcdb8bab1d422239f6a20abe27daa5ef99622f55d4da3217",
+  "meshes/right_shoulder_roll_link.STL": "b9e793e351e09027d27427c06df2c1cb6b37c0205d0f68686b0d73916c6821de",
+  "meshes/right_shoulder_yaw_link.STL": "0c9e4bec895f24c07fb2c4d132fc5e3cc7146155547267e9c270789af6567781",
+  "meshes/torso_link.STL": "3ab785cbfbd851b0e9c59a46871aabc4718f3f8e726e21a2d14360d217ec7ba8",
+  "LICENSE": "aef6394ba1597725a68308167324e675f562e6606027404deb1b9da254c2b9c1"
+ }
+}

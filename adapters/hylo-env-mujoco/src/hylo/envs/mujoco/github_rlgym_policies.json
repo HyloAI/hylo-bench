@@ -1,0 +1,15 @@
+{
+ "source": "https://github.com/unitreerobotics/unitree_rl_gym",
+ "repo": "unitreerobotics/unitree_rl_gym",
+ "commit": "276801e46c5d433564f24658bac64f254b7d2d4b",
+ "folder": "deploy/pre_train",
+ "license": "BSD-3-Clause",
+ "paths": {
+  "LICENSE": "LICENSE"
+ },
+ "sha256": {
+  "g1/motion.pt": "cf668f75b90d1abf73d2b87612a6e76bccc61ff7e083b63582d3f6aaa3c1759d",
+  "h1/motion.pt": "44a0fbceb81f3877833ae9a398d039bea1759cb0d3c8188181013885f70589eb",
+  "LICENSE": "aef6394ba1597725a68308167324e675f562e6606027404deb1b9da254c2b9c1"
+ }
+}
