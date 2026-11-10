@@ -111,11 +111,19 @@ class Workspace:
 
     def stage_edit(self, a: dict[str, Any]) -> dict[str, Any]:
         ops = json.loads(json.dumps(a["ops"]))
-        for op in ops:                                   # `kind` is what stage_show reports, not a field to set
-            if isinstance(op, dict) and isinstance(op.get("entity"), dict):
-                op["entity"].pop("kind", None)
-            if isinstance(op, dict) and isinstance(op.get("set"), dict):
-                op["set"].pop("kind", None)
+        for op in ops:
+            for key in ("entity", "set"):
+                fields = op.get(key) if isinstance(op, dict) else None
+                if not isinstance(fields, dict):
+                    continue
+                fields.pop("kind", None)  # stage_show's derived field
+                # Accept the position spelling returned by stage_show as well
+                # as the full entity contract, without silently choosing between conflicts.
+                if "pos" in fields:
+                    pose = fields.setdefault("pose", {})
+                    if not isinstance(pose, dict) or ("pos" in pose and pose["pos"] != fields["pos"]):
+                        raise ToolError("bad_patch", "pos and pose.pos must agree", field="ops")
+                    pose["pos"] = fields.pop("pos")
         try:
             p = Patch.model_validate({"expected_revision": a["expected_revision"], "ops": ops,
                                       "note": a.get("note", ""), "author": "model"})
@@ -254,7 +262,8 @@ class Workspace:
         w = self._world()
         img = w.view(lookat=a.get("lookat") or (0, 0, 0.5), distance=float(a.get("distance") or 3.0),
                      azimuth=float(a.get("azimuth") if a.get("azimuth") is not None else 135),
-                     elevation=float(a.get("elevation") if a.get("elevation") is not None else -25))
+                     elevation=float(a.get("elevation") if a.get("elevation") is not None else -25),
+                     size=(int(a.get("width") or 640), int(a.get("height") or 480)))
         return ToolOutput({"step": w.step}, images=[img], image_notes=["free view"])
 
     def pixel_to_world(self, a: dict[str, Any]) -> dict[str, Any]:
@@ -428,7 +437,8 @@ class Workspace:
                     obj({"last": {"type": "integer", "minimum": 1, "maximum": 200, "description": "how many"}}),
                     self.stage_history),
             ToolDef("stage_edit", "act", Help(
-                "Change the stage with a patch: add, remove, update or reparent entities.",
+                "Change the stage with a patch: add, remove, update or reparent entities. "
+                "Positions use pose.pos; the flat pos returned by stage_show is also accepted.",
                 use_when="building or changing a scene. The world keeps running the old revision until world_build.",
                 effect="a new stage revision (compare and swap on expected_revision).",
                 returns="the new revision.",
@@ -506,7 +516,9 @@ class Workspace:
                     obj({"lookat": vec(3, "point looked at"), "distance": {"type": "number", "minimum": 0.2,
                                                                            "maximum": 30, "description": "metres"},
                          "azimuth": {"type": "number", "description": "degrees"},
-                         "elevation": {"type": "number", "minimum": -89, "maximum": 89, "description": "degrees"}}),
+                         "elevation": {"type": "number", "minimum": -89, "maximum": 89, "description": "degrees"},
+                         "width": {"type": "integer", "minimum": 64, "maximum": 1280, "description": "image width in pixels"},
+                         "height": {"type": "integer", "minimum": 64, "maximum": 960, "description": "image height in pixels"}}),
                     self.view),
             ToolDef("pixel_to_world", "read", Help(
                 "A pixel of a captured image as a world point (from that capture's depth) and the entity it shows.",
